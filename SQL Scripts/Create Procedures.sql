@@ -1,11 +1,12 @@
 CREATE PROCEDURE CreateProduct
 	@Name VARCHAR(100),
 	@Price DECIMAL(10,2),
+	@Category VARCHAR(50),
 	@DateAdded DATE
 AS
 BEGIN
-	INSERT INTO Product(Name, Price, DateAdded)
-	VALUES(@Name, @Price, @DateAdded);
+	INSERT INTO Product(Name, Price, Category, DateAdded)
+	VALUES(@Name, @Price, @Category, @DateAdded);
 END;
 GO
 
@@ -30,12 +31,14 @@ GO
 CREATE PROCEDURE UpdateProduct
 	@Name VARCHAR(100),
 	@Price DECIMAL(10,2),
+	@Category VARCHAR(50),
 	@DateAdded DATE
 AS
 BEGIN
 	UPDATE Product
 	SET Name = @Name,
 		Price = @Price,
+		Category = @Category,
 		DateAdded = @DateAdded;
 END;
 GO
