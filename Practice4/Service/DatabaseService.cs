@@ -47,9 +47,13 @@ namespace Practice4.Service
         {
             return context.Sale
                 .GroupBy(sale => sale.SaleDate)
-                .Select(group => new DailySale(group.Key,
-                        group.Sum(sale => sale.SalePrice * sale.Quantity)))
+                .Select(group => new
+                {
+                    Date = group.Key,
+                    TotalSale = group.Sum(sale => sale.SalePrice * sale.Quantity)
+                })
                 .OrderByDescending(group => group.TotalSale)
+                .Select(record => new DailySale(record.Date, record.TotalSale))
                 .ToList();
         }
 
